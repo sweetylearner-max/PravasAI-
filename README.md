@@ -1,6 +1,6 @@
-# Safar360 🌍✈️
+# PravasAI🌍✈️
 
-**Safar360** is a premium, AI-powered travel discovery and planning platform designed for the modern explorer. Built for **VOYAGEHACK 3.0**, this application redefines how people discover, plan, and experience travel by blending immersive technology with intelligent planning tools.
+**PravasAI** is a premium, AI-powered travel discovery and planning platform designed for the modern explorer. Built for **VOYAGEHACK 3.0**, this application redefines how people discover, plan, and experience travel by blending immersive technology with intelligent planning tools.
 
 ---
 
@@ -105,13 +105,4 @@ CLOUDINARY_API_SECRET=your_cloudinary_secret
 -   **Frontend**: Deployed on **Vercel**.
 -   **Backend (Document Vault)**: Hosted on **Render**.
 -   **AI Agent Engine**: Hosted on **Hugging Face Spaces**.
--   **GitHub**: [lucky15426/Safar360](https://github.com/lucky15426/Safar360)
-
----
-
-## 🏆 VOYAGEHACK 3.0 Submission
-
-Developed with passion for **VOYAGEHACK 3.0**, Safar360 aims to bridge the gap between imagination and reality for travelers worldwide.
-
-
-
+-  
