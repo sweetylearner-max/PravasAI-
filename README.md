@@ -1,7 +1,9 @@
-# PravasAI
+# Safar360: Explore the World
 
-**An AI-powered travel discovery and planning platform.**
-Discover · Preview · Plan · Book · Travel, all in one place.
+**An AI-powered travel discovery and planning platform. Discover · Preview · Plan · Book · Travel, all in one place.**
+
+🌐 **Live Demo:** [safar360.vercel.app](https://safar360.vercel.app/)
+🏆 **Built for:** VOYAGEHACK 3.0
 
 ![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
@@ -19,11 +21,13 @@ Discover · Preview · Plan · Book · Travel, all in one place.
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [System Architecture](#system-architecture)
+- [Hackathon](#hackathon)
+- [Problem Statement](#problem-statement)
+- [Our Solution](#our-solution)
 - [Tech Stack](#tech-stack)
+- [System Architecture](#system-architecture)
 - [Key Features](#key-features)
-  [Third-Party Integrations](#third-party-integrations)
+- [Third-Party Integrations](#third-party-integrations)
 - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
 - [Environment Variables](#environment-variables)
@@ -39,26 +43,96 @@ Discover · Preview · Plan · Book · Travel, all in one place.
 
 ---
 
-## Overview
+## Hackathon
 
-**PravasAI** ("Pravas" means *journey* in Sanskrit and Hindi) brings the whole travel lifecycle into one platform. Travel planning today is fragmented: people jump between search engines, blogs, booking sites, flight trackers, maps, and note apps, and often book places without knowing what they really look like.
+**Event:** VOYAGEHACK 3.0
+**Project:** Safar360 (codebase: PravasAI)
+**Live link:** https://safar360.vercel.app/
 
-PravasAI addresses this by combining:
+*"Pravas"* means *journey* in Sanskrit and Hindi. Safar360 brings the whole travel lifecycle into one platform: **Discover → Experience → Plan → Book → Prepare → Travel.**
 
-- **Immersive previews:** 360° tours, VR views, and 3D terrain, so travelers can try before they fly.
-- **Intelligent planning:** an AI agent , smart itineraries, hidden-gem discovery, and a trip checklist.
-- **Live travel data:** real-time flight and hotel search, routing, weather, and flight tracking.
-- **Travel utilities:** a secure document vault and social groups for group trips.
+---
 
-```
-Discover → Experience → Plan → Book → Prepare → Travel
-```
+## Problem Statement
+
+**Indian tourism runs on uncertainty.**
+
+Travellers book monuments, hotels and whole trips sight-unseen, with nothing to go on but a handful of thumbnails and someone else's review. The consequence is **concentration**: the same dozen names absorb the visitors, the spending and the crowding, while the places a few hours away stay empty. Not because they are worse, but because nobody can picture them.
+
+**Planning is fragmented in the same way.** A trip is assembled across a search engine, three booking sites, a translation app and a folder of screenshots, and the parts never speak to each other. For a traveller who does not read English comfortably, most of that is closed off entirely.
+
+| Pain point | Impact |
+|---|---|
+| Sight-unseen booking | Travellers rely on thumbnails and reviews, so they pick only familiar names |
+| Over-concentration | A few famous destinations are overcrowded while lesser-known places stay empty |
+| Fragmented planning | Search, bookings, maps, translation and notes live in separate apps that don't talk to each other |
+| Language barrier | Non-English-first travellers are shut out of most planning tools |
+
+---
+
+## Our Solution
+
+Safar360 removes the uncertainty and unifies the planning journey in one place.
+
+| Problem | How Safar360 solves it |
+|---|---|
+| **Can't picture a place before booking** | **Immersive previews**: 360° panoramic tours, VR-compatible views, 3D terrain and street-level imagery let travellers *try before they fly*. |
+| **Only the same dozen destinations get visitors** | **Hidden Gems Discovery** surfaces local spots missing from typical tourist maps, with stories and community media, which spreads footfall and spending to lesser-known places. |
+| **Planning is scattered across many apps** | **One platform**: the **SafarX AI agent** handles chat, live flight and hotel search, web search and itinerary generation, backed by a smart itinerary planner, trip checklist, document vault and live flight tracker. |
+| **Parts of the trip never speak to each other** | The AI agent routes each query to the right live data source (TBO flights, TripAdvisor hotels, Tavily web search) and merges the results into a single plan. |
+| **Language barrier** | A conversational, Gemini-powered agent replaces juggling multiple English-heavy sites. Full multi-language UI support is on the [roadmap](#roadmap). |
+| **Group trips are chaotic** | **Social Groups** let travellers join or create communities to plan together. |
+
+**Flow:** Discover → Experience → Plan → Book → Prepare → Travel
+
+---
+
+## Tech Stack
+
+### Frontend
+
+| Category | Technology | Role |
+|---|---|---|
+| Framework | React + Vite | Component-based UI with fast builds and HMR |
+| Styling | Tailwind CSS | Utility-first styling |
+| Animation | Framer Motion, GSAP | UI transitions and cinematic effects |
+| 3D / VR | React Three Fiber (Three.js) | 3D terrain and VR-compatible views |
+| Street-level imagery | Mapillary-js | Immersive street views |
+| Maps | Leaflet + OSRM | Interactive maps, routing, distance calculation |
+| State management | Zustand | Lightweight global state |
+| Data fetching | React Query | Caching and request management |
+| Authentication | Clerk | User management and sessions |
+
+### Backend and AI
+
+| Category | Technology | Role |
+|---|---|---|
+| Vault API | Node.js + Express | Secure document handling |
+| AI engine | FastAPI (Python) | Agent orchestration service |
+| LLM | Google Gemini | Chat, reasoning, itinerary generation |
+| Model hosting | Hugging Face | Additional models for the agent engine |
+
+### Data and Storage
+
+| Category | Technology | Role |
+|---|---|---|
+| Document database | MongoDB Atlas | Vault metadata |
+| Application database | Supabase | Application data |
+| Media storage | Cloudinary | Files, images, documents |
+
+### Hosting
+
+| Service | Platform |
+|---|---|
+| Frontend | Vercel |
+| Document Vault backend | Render |
+| AI agent engine | Hugging Face Spaces |
 
 ---
 
 ## System Architecture
 
-PravasAI is built as **three independently deployed services** (frontend, document vault backend, AI agent engine) on top of a shared data and media layer and a set of external APIs.
+Safar360 is built as **three independently deployed services** (frontend, document vault backend, AI agent engine) on top of a shared data and media layer and a set of external APIs.
 
 ```mermaid
 flowchart TB
@@ -125,86 +199,43 @@ flowchart TB
 
 | Layer | Responsibility | Key technologies |
 |---|---|---|
-| **Client** | UI, routing, state, auth, immersive 360°/VR/3D views, maps | React, Vite, Tailwind, Zustand, React Query, Clerk, React Three Fiber, Leaflet |
-| **Document Vault API** | Authenticated upload, storage, and retrieval of travel documents | Node.js, Express, MongoDB Atlas, Cloudinary |
-| **AI Agent Engine** | Reasoning, tool routing, itinerary generation, live flight/hotel/web lookups | FastAPI, Google Gemini, Hugging Face |
-| **Data and Media** | Document metadata, application data, media and file storage | MongoDB Atlas, Supabase, Cloudinary |
-| **External APIs** | Live travel, weather, flight, and routing data | TBO, TripAdvisor (RapidAPI), Tavily, OpenWeather, AviationStack, OSRM |
+| Client | UI, routing, state, auth, immersive 360°/VR/3D views, maps | React, Vite, Tailwind, Zustand, React Query, Clerk, React Three Fiber, Leaflet |
+| Document Vault API | Authenticated upload, storage and retrieval of travel documents | Node.js, Express, MongoDB Atlas, Cloudinary |
+| AI Agent Engine | Reasoning, tool routing, itinerary generation, live flight/hotel/web lookups | FastAPI, Google Gemini, Hugging Face |
+| Data and Media | Document metadata, application data, media and file storage | MongoDB Atlas, Supabase, Cloudinary |
+| External APIs | Live travel, weather, flight and routing data | TBO, TripAdvisor (RapidAPI), Tavily, OpenWeather, AviationStack, OSRM |
 
 ### Typical SafarX request flow
 
 ```mermaid
 sequenceDiagram
-    participant U as Traveler
-    participant C as React Client
-    participant A as FastAPI Agent Engine
-    participant G as Google Gemini
-    participant X as Live APIs (TBO, TripAdvisor, Tavily)
+    participant U as Traveller
+    participant FE as React Frontend
+    participant AI as FastAPI (SafarX Agent)
+    participant G as Gemini
+    participant T as Tools (TBO / TripAdvisor / Tavily)
 
-    U->>C: "Find flights and a hotel for a weekend in Goa"
-    C->>A: REST request (via React Query)
-    A->>G: Interpret intent, choose tools
-    G-->>A: Plan: flight search + hotel search
-    A->>X: Query the relevant data sources
-    X-->>A: Live results
-    A->>G: Merge and summarize results
-    G-->>A: Conversational + structured response
-    A-->>C: Response
-    C-->>U: Actionable results
+    U->>FE: "Plan 4 days in Hampi under ₹20k"
+    FE->>AI: REST request (React Query)
+    AI->>G: Understand intent, choose tools
+    G-->>AI: Tool plan
+    AI->>T: Live flights, hotels, web results
+    T-->>AI: Results
+    AI->>G: Merge into itinerary
+    G-->>AI: Final plan
+    AI-->>FE: Structured response
+    FE-->>U: Itinerary + maps + previews
 ```
 
 ### Design decisions
 
 | Decision | Why |
 |---|---|
-| **Decoupled services** | Frontend, vault, and AI engine deploy, scale, and fail independently. |
-| **Dedicated AI service** | Heavy AI workloads stay off the main API, so the app remains responsive. |
-| **Hybrid data layer** | MongoDB fits document metadata, Supabase handles application data, Cloudinary handles binary files. |
-| **Auth-first security** | Clerk secures the client, and the vault backend verifies every request server-side. |
-| **Client-side data caching** | React Query avoids redundant requests in a heavily animated, data-rich UI. |
-
----
-
-## Tech Stack
-
-### Frontend
-
-| Category | Technology | Role |
-|---|---|---|
-| Framework | React + Vite | Component-based UI with fast builds and HMR |
-| Styling | Tailwind CSS | Utility-first styling |
-| Animation | Framer Motion, GSAP | UI transitions and cinematic effects |
-| 3D / VR | React Three Fiber | 3D terrain and VR-compatible views |
-| Street-level imagery | Mapillary-js | Immersive street views |
-| Maps | Leaflet + OSRM | Interactive maps, routing, and distance calculation |
-| State management | Zustand | Lightweight global state |
-| Data fetching | React Query | Caching and request management |
-| Authentication | Clerk | User management and sessions |
-
-### Backend and AI
-
-| Category | Technology | Role |
-|---|---|---|
-| Vault API | Node.js + Express | Secure document handling |
-| AI engine | FastAPI | Agent orchestration service |
-| LLM | Google Gemini | Chat, reasoning, itinerary generation |
-| Model hosting | Hugging Face | Additional models for the agent engine |
-
-### Data and Storage
-
-| Category | Technology | Role |
-|---|---|---|
-| Document database | MongoDB Atlas | Vault metadata |
-| Application database | Supabase | Application data |
-| Media storage | Cloudinary | Files, images, and documents |
-
-### Hosting
-
-| Service | Platform |
-|---|---|
-| Frontend | Vercel |
-| Document Vault backend | Render |
-| AI agent engine | Hugging Face Spaces |
+| Decoupled services | Frontend, vault and AI engine deploy, scale and fail independently. |
+| Dedicated AI service | Heavy AI workloads stay off the main API, so the app remains responsive. |
+| Hybrid data layer | MongoDB fits document metadata, Supabase handles application data, Cloudinary handles binary files. |
+| Auth-first security | Clerk secures the client, and the vault backend verifies every request server-side. |
+| Client-side data caching | React Query avoids redundant requests in a heavily animated, data-rich UI. |
 
 ---
 
@@ -223,16 +254,16 @@ sequenceDiagram
 
 | Feature | Description |
 |---|---|
+| SafarX AI Agent | Chat-based agent for flights, hotels, web search and itinerary generation. |
 | Smart Itinerary Planner | Personalized plans that optimize routes by interests and travel style. |
 | Hidden Gems Discovery | Local spots missing from typical tourist maps, with stories and community media. |
 | Trip Checklist | Packing and pre-trip preparation so nothing essential is forgotten. |
-
 
 ### Travel Utilities and Community
 
 | Feature | Description |
 |---|---|
-| Document Vault | Secure wallet for tickets, IDs, and PDFs. |
+| Document Vault | Secure wallet for tickets, IDs and PDFs. |
 | Live Flight Tracker | Real-time tracking of flights worldwide. |
 | Social Groups | Join or create travel communities to plan group trips. |
 
@@ -281,6 +312,7 @@ PravasAI/
 │   ├── models/
 │   ├── middleware/
 │   └── server.js
+├── ai-engine/                 # SafarX AI agent (FastAPI)
 ├── .env
 ├── package.json
 ├── vite.config.js
@@ -432,13 +464,13 @@ HUGGINGFACE_TOKEN=your_hf_token
 
 | Component | Platform |
 |---|---|
-| Frontend | Vercel |
+| Frontend | Vercel ([live](https://safar360.vercel.app/)) |
 | Document Vault Backend | Render |
 | AI Agent Engine | Hugging Face Spaces |
 
-1. **Frontend (Vercel):** Import the repository, set the framework preset to Vite, add all `VITE_*` variables, and deploy.
-2. **Backend (Render):** Create a new Web Service from the `server/` directory, set the start command to `node server.js`, and add the backend environment variables.
-3. **AI Engine (Hugging Face Spaces):** Create a new Space for the FastAPI app, add your secrets under *Settings → Variables and secrets*, and set `VITE_AI_API_URL` to the Space URL.
+- **Frontend (Vercel):** Import the repository, set the framework preset to Vite, add all `VITE_*` variables, and deploy.
+- **Backend (Render):** Create a new Web Service from the `server/` directory, set the start command to `node server.js`, and add the backend environment variables.
+- **AI Engine (Hugging Face Spaces):** Create a new Space for the FastAPI app, add your secrets under *Settings → Variables and secrets*, and set `VITE_AI_API_URL` to the Space URL.
 
 ---
 
@@ -461,7 +493,7 @@ HUGGINGFACE_TOKEN=your_hf_token
 | Running AI workloads without slowing the main app | Isolated the agent as a separate FastAPI service. |
 | Keeping a heavily animated UI performant | Used Framer Motion and GSAP selectively, with React Query caching to avoid redundant requests. |
 | Managing sensitive documents responsibly | Built an authenticated, dedicated vault backend with managed file storage. |
-| Shipping a full-stack product end to end | Split the system into independent services so each part could be built, deployed, and scaled separately. |
+| Shipping a full-stack product end to end | Split the system into independent services so each part could be built, deployed and scaled separately. |
 
 ---
 
@@ -489,13 +521,13 @@ HUGGINGFACE_TOKEN=your_hf_token
 
 ## Author
 
-Designed and developed by [@sweetylearner-max](https://github.com/sweetylearner-max).
+Designed and developed by [@sweetylearner-max](https://github.com/sweetylearner-max) for **VOYAGEHACK 3.0**.
 
 ---
 
 ## Contributing
 
-Contributions, issues, and feature requests are welcome.
+Contributions, issues and feature requests are welcome.
 
 1. Fork the repository
 2. Create your feature branch: `git checkout -b feature/amazing-feature`
@@ -507,19 +539,18 @@ Contributions, issues, and feature requests are welcome.
 
 ## License
 
-Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
+Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
 ## Acknowledgements
 
+- **VOYAGEHACK 3.0** organizers for the platform and the problem statement
 - TBO for the flight search and booking APIs
-- Google Gemini, Hugging Face, Tavily, and RapidAPI for the AI and data layers
-- Clerk, Supabase, MongoDB Atlas, and Cloudinary for infrastructure
+- Google Gemini, Hugging Face, Tavily and RapidAPI for the AI and data layers
+- Clerk, Supabase, MongoDB Atlas and Cloudinary for infrastructure
 - Vercel and Render for hosting
-- OpenStreetMap, OSRM, Leaflet, and Mapillary for mapping and street-level imagery
-- The open-source community behind React, Vite, Tailwind, Three.js, and every library used here
+- OpenStreetMap, OSRM, Leaflet and Mapillary for mapping and street-level imagery
+- The open-source community behind React, Vite, Tailwind, Three.js and every library used here
 
----
-
-*Pravas karo, PravasAI ke saath.*
+*Pravas karo, Safar360 ke saath.*
